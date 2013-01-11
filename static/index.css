@@ -1,0 +1,25 @@
+.pagecontent {
+    border-top: 1px solid #DDDDDD;
+    padding-top: 10px;
+}
+
+ul.ontologies > li {
+    border-bottom: 1px solid #F1F1F1;
+    list-style-type: none;
+    margin: 0 0 20px;
+    min-height: 66px;
+    overflow: hidden;
+    padding: 0 0 20px;
+    position: relative;
+}
+
+.ontology-name {
+    float: left;
+}
+
+.ontology-url {
+    float: right;
+}
+
+.ontology-description {
+}

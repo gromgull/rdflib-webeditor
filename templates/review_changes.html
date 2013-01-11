@@ -1,0 +1,62 @@
+{% extends "page.html" %}
+{% import 'changelogs.html' as changelogs %}
+
+{% block extra_head %}
+{{ super() }}
+{{ import_css('review.css') }}
+{{ import_js('review.js') }}
+{{ import_css('changelogs.css') }}
+{% endblock %}
+
+{% block crumbs %}{{ crumbs([{'text': 'Your Changes'}]) }}{% endblock %}
+
+{% block pagecontent %}
+{% if changes %}
+{{ changelogs.display_changes(changes, true) }}
+
+<div class="tools clearfix">
+  <button id="opensubmit" type="button">Submit</button>
+  <button id="openrevert" type="button">Revert</button>
+</div>
+
+<div id="submission_dialog" class="reallyhideme dialog metabox clearfix">
+  <h1>Submit Change Proposal</h1>
+  <form action="" method="post">
+    <label for="comment">Enter details</label>
+    <textarea class="clearfix" name="comment"></textarea>
+    <select name="unchecked">
+      <option value="revert">revert unchecked to original</option>
+      <option value="keep">keep unchecked changed</option>
+    </select>
+    <button class="cancel" type="button" title="cancel">Cancel</button>
+    <button id="submitproposal" 
+            disabled="disabled" 
+            type="submit"
+            name="submit"
+            title="submit proposal">
+      Submit proposal
+    </button>
+  </form>
+</div>
+
+<div id="revert_changes_dialog" class="reallyhideme dialog metabox clearfix">
+  <h1>Revert Changes</h1>
+  <form action="" method="post">
+    <select name="unchecked">
+      <option value="revert">revert checked</option>
+      <option value="keep">revert unchecked</option>
+    </select>
+    <button class="cancel" type="button" title="cancel">Cancel</button>
+    <button id="submitrevert" 
+            type="submit"
+            name="revert"
+            title="revert">
+      Revert
+    </button>
+  </form>
+</div>
+
+{% else %}
+<h1>NO CHANGES TO REVIEW</h1>
+{% endif %}
+{% endblock %}

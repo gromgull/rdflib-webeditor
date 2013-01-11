@@ -1,0 +1,31 @@
+{# macro used for generating the data section from a list of options #}
+
+{% macro gen_select_data(options) -%}
+[
+{%- if options is mapping %}
+{%- for optgroup,opts in options.items() %}
+{text: "{{ optgroup }}", children: [
+{%- for opt in opts %}
+{id: "{{ opt.uri }}", text: "{{ optgroup }}:{{ opt.shortname }}"}
+{%- if loop.last %}{%- else %}, {% endif %}
+{%- endfor %}
+]}
+{%- if loop.last %}{%- else %}, {% endif %}
+{%- endfor %}
+{%- else %}
+{%- for opt in options %}
+{id: "{{ opt }}", text: "{{ opt }}"}
+{%- if loop.last %}{%- else %}, {% endif %}
+{%- endfor %}
+{% endif %}
+]
+{% endmacro %}
+
+
+{% macro text_input(name, value) -%}
+<input class="object" type=text name="{{ name }}" value="{{ value }}"/>
+{% endmacro %}
+
+{% macro textarea(name, value) -%}
+<textarea class="object" name="{{ name }}">{{ value }}</textarea>
+{% endmacro %}

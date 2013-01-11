@@ -1,0 +1,15 @@
+#toolbar
+{
+    height: 35px;
+    background-color: #F8F8F8;
+    position: fixed;
+    bottom: 0px;
+    left: 2%;
+    right: 2%;
+    z-index: 100;
+    border-top: 1px solid #cacaca;
+    border-left: 1px solid #cacaca;
+    border-right: 1px solid #cacaca;
+    padding: 5px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 10px rgba(0, 0, 0, 0.1);
+}	

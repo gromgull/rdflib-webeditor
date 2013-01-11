@@ -1,0 +1,45 @@
+button:hover {
+    background: -moz-linear-gradient(#599BDC, #3072B3) repeat scroll 0 0 transparent;
+    border-color: #518CC6 #518CC6 #2A65A0;
+    color: #FFFFFF;
+    text-decoration: none;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+button:focus {
+}
+
+button:active {
+    /* TODO: make this look better */
+    background: -moz-linear-gradient(#3072B3, #599BDC) repeat scroll 0 0 transparent;
+}
+
+button:disabled {
+    color: #D4D4D4;
+}
+button:hover:disabled {
+    color: #D4D4D4;
+    border-color: #D4D4D4 #D4D4D4 #BCBCBC;
+    background: -moz-linear-gradient(#FAFAFA, #EAEAEA) repeat scroll 0 0 transparent;
+    text-shadow: none;
+}
+
+button {
+    -moz-user-select: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    position: relative;
+    background: -moz-linear-gradient(#FAFAFA, #EAEAEA) repeat scroll 0 0 transparent;
+    border-radius: 3px 3px 3px 3px;
+    border-color: #D4D4D4 #D4D4D4 #BCBCBC;
+    border-image: none;
+    border-style: solid;
+    padding: 4px; /* padding fixes the text shift problem */
+    outline: none;
+    border-width: 1px;
+    color: #333333;
+    font-weight: bold;
+}

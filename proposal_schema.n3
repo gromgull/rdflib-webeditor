@@ -1,0 +1,84 @@
+# baseURI: http://data.igreen-services.com/proposals
+
+@prefix :        <http://data.igreen-services.com/proposals/> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+:Proposal
+        rdf:type rdfs:Class .
+
+:Comment
+        rdf:type rdfs:Class .
+
+# Class for the Accepted/Rejects/Proposed values
+:Status
+        rdf:type rdfs:Class .
+
+:Accepted
+        rdf:type :Status .
+
+:Rejected
+        rdf:type :Status .
+
+:Proposed
+        rdf:type :Status .
+
+# Class for the Change type values
+:Change
+        rdf:type rdfs:Class .
+
+:Addition
+        rdf:type :Change .
+
+:Removal
+        rdf:type :Change .
+
+:status
+        rdf:type rdfs:Property ;
+        rdfs:range :Status .
+
+:owner
+        rdf:type rdfs:Property .
+
+:created
+        rdf:type rdfs:Property ;
+        rdfs:range xsd:dateTime .
+
+:proposals
+        rdf:type rdfs:Property ;
+        rdfs:range :Proposal .
+
+:type
+        rdf:type rdfs:Property ;
+        rdfs:domain :Proposal ;
+        rdfs:range :Change .
+
+:subject
+        rdf:type rdfs:Property .
+
+:predicate
+        rdf:type rdfs:Property ;
+        rdfs:domain :Proposal .
+
+:object
+        rdf:type rdfs:Property ;
+        rdfs:domain :Proposal .
+
+:oldObject
+        rdf:type rdfs:Property .
+
+:related
+        rdf:type rdfs:Property ;
+        rdfs:range :Proposal .
+
+:acceptedOrRejectedBy
+        rdf:type rdfs:Property .
+
+:acceptedOrRejectedOn
+        rdf:type rdfs:Property .
+
+:comment
+        rdf:type rdfs:Property ;
+        rdfs:domain :Comment ;
+        rdfs:range rdfs:Literal .

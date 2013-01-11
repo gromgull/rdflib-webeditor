@@ -1,0 +1,78 @@
+{% macro display_changes(changes, checkboxes) %}
+{% for ctx,subjs in changes.items() %}
+<h2 class="context"><a href="{{ url_for('ontology', ontology_=subjs['prefix']) }}">{{ ctx }}</a></h2>
+{% for subj,preds in subjs.items() %}
+{% if subj != 'prefix' %}
+<table id="changes">
+<tr class="subject">
+  <td colspan="2">
+    <a href="{{ url_for('ontology', ontology_=subjs['prefix'], resource_=subj) }}">
+      {% if preds['label'] %}
+      <div class="label">
+        {{ preds['label'] }}
+      </div>
+      {% endif %}
+      {% if preds['qname'] %}
+      <div class="qname">
+        {{ preds['qname'] }}
+      </div>
+      {% endif %}
+      <div class="uri">
+        {{ subj }}
+      </div>
+    </a>
+  </td>
+  {% if checkboxes %}
+  <td><input type="checkbox" class="subject" name="{{subj}}" checked="checked"/></td>
+  {% endif %}
+</tr>
+{% for pred_uri,pred in preds.items() %}
+{% for val in pred['values'] %}
+<tr class="value {{ val.class }}">
+  <td>
+    {% if pred['label'] %}
+    <div class="label">
+      {{ pred['label'] }}
+    </div>
+    {% endif %}
+    {% if pred['qname'] %}
+    <div class="qname">
+      {{ pred['qname'] }}
+    </div>
+    {% endif %}
+    <div class="uri">
+      {{ pred_uri }}
+    </div>
+  </td>
+  <td>
+    {% if val['label'] %}
+    <div class="label">
+      {{ val['label'] }}
+    </div>
+    {% endif %}
+    {% if val['qname'] %}
+    <div class="qname">
+      {{ val['qname'] }}
+    </div>
+    {% endif %}
+    <div class="value">
+      {% if val.type == 'Literal' %}
+      "{{ val.value }}"{% if val.language %}@{{ val.language }}{% endif %}{% if val.datatype %}^^{{ val.datatype }}{% endif %}
+      {% else %}
+      {{ val.value }}
+      {% endif %}
+    </div>
+  </td>
+  {% if checkboxes %}
+  <td>
+    <input type="checkbox" name="{{ val['id'] }}" class="predicate" checked="checked"/>
+  </td>
+  {% endif %}
+</tr>
+{% endfor %}
+{% endfor %}
+{% endif %}
+</table>
+{% endfor %}
+{% endfor %}
+{% endmacro %}

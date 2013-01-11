@@ -1,0 +1,49 @@
+{% extends "page.html" %}
+{% block extra_head %}
+{{ super() }}
+<script>
+$(document).ready(function() { 
+    $("select[name=provider]").select2({
+        placeholder: "Select OpenID Provider",
+        width: "element",
+        allowClear: true
+    });
+    /*
+    $("input[name='ooid']").select2({
+        tags:[], 
+        dropdownCss: { display: "none" },
+        maximumSelectionSize: 1
+    });
+    */
+});
+</script>
+{% endblock %}
+
+{# TODO: change this form to use the custom input query type #}
+
+{% block pagecontent %}
+<div id="login_form">
+  {% if error %}<div id="error_box">{{ error }}</div>{% endif %}
+  <form action="{{ url_for('login') }}" method=post>
+    <p>
+    Select OpenID Provider:<br/>
+    <select name=provider style="width:300px">
+      <option value="https://www.google.com/accounts/o8/id">Google</option>
+      <option value="yahoo.com">Yahoo</option>
+    </select>
+    </p>
+    <div class="select2-container select2-container-multi select2-dropdown-open" style="width: 312px">
+      Or input your own:<br/>
+      <ul class="select2-choices"><li class="select2-search-field">
+          <input name=ooid class="select2-input" type=text style="width:312px;"/>
+      </li></ul>
+    </div>
+    <p>
+      <button type=submit>Sign in</button>
+      <input type=hidden name=next value="{{ next }}">
+    </p>
+  </form>
+</div>
+{% endblock %}
+{% block query %}
+{% endblock %}

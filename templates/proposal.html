@@ -1,0 +1,66 @@
+{% extends "page.html" %}
+{% import 'changelogs.html' as changelogs %}
+
+{% block extra_head %}
+{{ super() }}
+{{ import_css('changelogs.css') }}
+{# import_css('proposal.css') #}
+{{ import_js('proposal.js') }}
+{% endblock %}
+
+{% block crumbs %}{{ crumbs([{'text': 'Proposals', 'url': url_for('proposals')}, {'text':id}]) }}{% endblock %}
+
+{% block pagecontent %}
+{% for h in proposal.history %}
+<div class="metabox clearfix">
+  <div class="description">
+    <p>
+      <b>{{ h.status|capitalize }}</b> on <b>{{ h.date|datetimeformat('%d.%m.%Y at %H:%M') }}</b> by <b>{{ h.user.name }}</b><br/>
+      {# TODO: i don't think "safe" here is actually safe #}
+      {{ h.comment|replace("\r\n", "<br/>")|safe }}
+    </p>
+  </div>
+</div>
+{% endfor %}
+
+{{ changelogs.display_changes(changes, false) }}
+
+{% if proposal.status == 'proposed' %}
+<div class="tools clearfix">
+  <button id="openaccept">Accept</button> or 
+  <button id="openreject">Reject</button> this proposal.
+</div>
+{% endif %}
+
+<div id="reject_dialog" class="dialog reallyhideme metabox clearfix">
+  <h1>Reject Proposal</h1>
+  <form action="" method="post">
+    <label for="comment">Enter the reason for rejecting this proposal:</label>
+    <textarea class="clearfix" name="comment"></textarea>
+    <button class="cancel" type="button" title="cancel">cancel</button>
+    <button id="reject" 
+            disabled="disabled" 
+            type="submit" 
+            name="reject"
+            title="reject">
+      Reject
+    </button>
+  </form>
+</div>
+
+<div id="accept_dialog" class="dialog reallyhideme metabox clearfix">
+  <h1>Accept Proposal</h1>
+  <form action="" method="post">
+    <span>Are you sure you want to accept this proposal?</span>
+    <button class="cancel" type="button" title="cancel">cancel</button>
+    <button id="accept" 
+            type="submit" 
+            name="accept"
+            title="Accept">
+      Accept
+    </button>
+  </form>
+</div>
+
+<h1>Comments</h1>
+{% endblock %}

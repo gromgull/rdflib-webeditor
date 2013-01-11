@@ -1,0 +1,48 @@
+{% extends "page.html" %}
+
+{% block extra_head %}
+{{ super() }}
+{{ import_css('proposals.css') }}
+{{ import_js('proposals.js') }}
+<script type="text/javascript">
+
+
+</script>
+{% endblock %}
+
+{% block crumbs %}{{ crumbs([{'text': 'Proposals'}]) }}{% endblock %}
+
+{% block pagecontent %}
+
+{{ tabnav([
+{'text': 'All', 'selected': true, 'id': 'showall'},
+{'text': 'Proposed', 'counter': 0, 'id': 'showproposed'},
+{'text': 'Accepted', 'counter': 0, 'id': 'showaccepted'},
+{'text': 'Rejected', 'counter': 0, 'id': 'showrejected'}
+],[]) }}
+
+{% for p in proposals %}
+<div class="proposal {{ p.status }}">
+  <div class="head">
+    <a href="{{ url_for('proposal', proposal_=p.id) }}">
+    {% if p.subjects|count == 1 %}
+    <b>{{ p.subjects|count }}</b> changed subject
+    {% else %}
+    <b>{{ p.subjects|count }}</b> changed subjects
+    {% endif %}
+    with <b>{{ p.additions }}</b> Additions and <b>{{ p.removals }}</b> Removals by <b>{{ p.user.name }}</b> at <b>{{ p.date|datetimeformat }}</b>
+    </a>
+  </div>
+  <div class="subjects">
+    <ul>
+    {% for s in p.subjects %}
+    <li><a href="{{ url_for('ontology', ontology_=s.ontology, resource_=s.subject) }}">{{ s.subject }}</a></li>
+    {% endfor %}
+    </ul>
+  </div>
+  {% if p.comment %}
+  <div class="comment">{{ p.comment }}</div>
+  {% endif %}
+</div>
+{% endfor %}
+{% endblock %}

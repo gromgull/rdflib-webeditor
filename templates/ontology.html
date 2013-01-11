@@ -1,0 +1,74 @@
+{% extends "page.html" %}
+
+{% block extra_head %}
+{{ super() }}
+{{ import_js('ontology.js') }}
+{{ import_css('ontology.css') }}
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+    initOntologyPage();
+});
+
+</script>
+{% endblock %}
+
+{% block crumbs %}{{ crumbs([{'url':'/', 'text': 'Ontologies'}, {'text': ontology_.prefix}]) }}{% endblock %}
+
+{% block actions %}
+{{ action("create-new-resource", "Create New Resource", "Create New Resource", url_for('create_resource', ontology_=ontology_.prefix)) }}
+{% endblock %}
+
+
+{% block pagecontent %}
+<div class="metabox clearfix">
+  <div class="ontology-description">
+    <p>
+      {{ ontology_.description }}
+    </p>
+  </div>
+</div>
+
+{{ tabnav([
+{'text': 'Resources', 'selected': true, 'target': '#resources', 'id': 'resourcetab'},
+{'text': 'Source', 'target': '#source', 'id': 'sourcetab'}
+],[]) }}
+
+<div class="metabox clearfix content-tab" id="resources">
+{#
+<ul class="resources">
+  {% for r in resources %}
+  <li>
+    <h3>
+      <a href="{{ url_for('ontology', ontology_=ontology_.prefix, resource_=r.uri) }}" title="{{ r.uri }}">{% if r.label %}{{ r.label }}{% else %}{% if r.qname %}{{ r.qname }}{% else %}{{ r.uri }}{% endif %}{% endif %}</a>
+    </h3>
+  </li>
+  {% endfor %}
+</ul>
+</div>
+<div class="metabox clearfix content-tab" id="proposals">
+<ul class="resources">
+  {% for r in proposals %}
+  <li>
+    <h3>
+      <a href="{{ url_for('ontology', ontology_=ontology_.prefix, resource_=r) }}">{{ r }}</a>
+    </h3>
+  </li>
+  {% endfor %}
+</ul>
+#}
+<table class="resources">
+  {% for r in resources %}
+  <tr>
+    <td>
+      <a href="{{ url_for('ontology', ontology_=ontology_.prefix, resource_=r.uri) }}" title="{{ r.uri }}">{% if r.qname %}{{ r.qname }}{% else %}{{ r.uri }}{% endif %}</a>
+    </td>
+    <td>
+      <a href="{{ url_for('ontology', ontology_=ontology_.prefix, resource_=r.uri) }}">{{ r.label }}</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+</div>
+{% endblock %}

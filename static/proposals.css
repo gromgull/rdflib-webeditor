@@ -1,0 +1,38 @@
+.proposal a {
+    color: black;
+}
+
+.proposal div {
+    padding: 8px 8px 8px 8px;
+    width: 100%;
+}
+
+.proposal .head {
+  /*  background: none repeat scroll 0 0 #E6F1F6;
+    border: 1px solid #C5D5DD;
+    border-radius: 4px 4px 0px 0px; */
+    background: linear-gradient(#FAFAFA, #EAEAEA) repeat scroll 0 0 transparent;
+    border: 1px solid #CCCCCC;
+    border-bottom: 1px solid #D8D8D8;
+    color: #555555;
+    font-size: 12px;
+  
+    overflow: hidden;
+    text-align: left;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+
+.proposal .subjects {
+    border-left: 1px solid #C5D5DD;
+    border-right: 1px solid #C5D5DD;
+}
+
+.proposal .subjects ul {
+    list-style-type: none;
+}
+
+.proposal .comment {
+    background: none repeat scroll 0 0 #fff;
+    border: 1px solid #C5D5DD;
+    margin: 0px 0px 20px 0px;
+}

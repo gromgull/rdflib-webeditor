@@ -1,0 +1,13 @@
+
+h2 {
+    padding-bottom: 12px;
+}
+
+button[type='submit'] {
+    float: right;
+}
+
+.tools button {
+    margin-left: 10px;
+    float: right;
+}

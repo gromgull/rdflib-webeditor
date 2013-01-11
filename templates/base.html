@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>iGreen Vocabulary Service{% if title is defined %} - {{ title }}{% endif %}</title>
+    {%- macro import_css(filename) %}
+    <link href="{{ url_for('static', filename=filename) }}" rel="stylesheet"/>
+    {% endmacro %}
+    {%- macro import_js(filename) %}
+    <script src="{{ url_for('static', filename=filename) }}" type="text/javascript"></script>
+    {% endmacro %}
+    {{ import_css('base.css') }}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='jquery.autosize.js') }}"></script>
+    <link href="{{ url_for('static', filename='select2.css') }}" rel="stylesheet"/>
+    <script src="{{ url_for('static', filename='select2.js') }}"></script>
+    <script src="{{ url_for('static', filename='select2_custom.js') }}"></script>
+    <script src="{{ url_for('static', filename='templates.js') }}"></script>
+    {% block extra_head %}{% endblock %}
+    <script type="text/javascript">
+      var get_template = function(id) {
+          return $($("#templates > #" + id).val());
+          
+      };
+    </script>
+  </head>
+  <body>
+    <div class="reallyhideme" id="templates">
+      {% macro load_template(id, file) %}
+      <textarea id="{{ id }}">
+        {% filter forceescape %}
+        {% include file ignore missing %}
+        {% endfilter %}
+      </textarea>
+      {% endmacro %}
+      {% block templates %}
+      {% endblock %}
+    </div>
+    <div class="header" class="clearfix">
+      <div class="container clearfix">
+        <a class="header-title" href="/">iGreen Vocabulary Service</a>
+        <div class="divider-vertical"></div>
+        <a class="notification-indicator" href="/"><span class="all-read"></span></a>
+        <div class="divider-vertical"></div>
+        {%- macro menu_item(id, link, text) %}
+        <li id="{{ id }}"><a href="{{ link }}">{{ text|safe }}</a></li>
+        {%- endmacro %}
+        <ul class="top-nav">
+          {{ menu_item("nav-ontologies", url_for('index'), "Ontologies") }}
+          {{ menu_item("nav-proposals", url_for('proposals'), "Proposals") }}
+        </ul>
+        <ul id="user-links">
+          {% block menu %}
+          {% if not session.logged_in %}
+          {{ menu_item("login", url_for('login'), "login") }}
+          {% else %}
+          <li><b>Logged in as {{ session.user.name }}</b></li>
+          {% if no_of_uncommited_changes > 0 %}
+          {{ menu_item("changes", url_for('review'), "Review Changes <span>" ~ no_of_uncommited_changes ~ "</span>") }}
+          {% endif %}
+          {{ menu_item("logout", url_for('logout'), "logout") }}
+          {% endif %}
+          {{ menu_item("help", url_for('help'), "help") }}
+          {% endblock %}
+        </ul>
+      </div>
+    </div>
+    <div id="content" class="site">
+      {% block site %}
+      {% endblock %}
+    </div>
+    <div id="footer">
+      <div class="footer">
+        <div class="container clearfix">
+          {% block footer %}
+          <div id="versions">running rdflib {{rdflib_version}}, rdfextras {{rdfextras_version}} on python {{python_version}}</div>
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

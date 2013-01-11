@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+{{ import_css('page.css') }}
+{{ import_css('buttons.css') }}
+{{ import_css('tabnav.css') }}
+{{ import_js('tabnav.js') }}
+{% endblock %}
+
+{# 
+item keys: 
+    text: the text to display in the tab
+    counter: optionally add a number next to the text
+    selected: if this tab is the active tab
+    id: an optional id for the tab element
+    target: the optional url to attach to the tab
+#}
+{% macro tabnav(items_left, items_right) %}
+<div class="tabnav">
+  <span class="tabnav-right">
+    <ul class="tabnav-tabs">
+      {% for item in items_right %}
+      <li{% if item.id %} id="{{ item.id }}"{% endif %}>
+        <a href="{% if item.target %}{{ item.target }}{% else %}#{% endif %}" class="tabnav-tab{% if item.selected %} selected{% endif %}">
+          {{ item.text }}{% if 'counter' in item %}<span class="counter">{{ item.counter }}</span>{% endif %}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </span>
+  <div class="tabnav-widget"></div>
+  <ul class="tabnav-tabs">
+    {% for item in items_left %}
+    <li{% if item.id %} id="{{ item.id }}"{% endif %}>
+      <a href="{% if item.target %}{{ item.target }}{% else %}#{% endif %}" class="tabnav-tab{% if item.selected %} selected{% endif %}">
+        {{ item.text }}{% if 'counter' in item %}<span class="counter">{{ item.counter }}</span>{% endif %}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endmacro %}
+
+{% macro crumbs(crumbs) %}
+{% for c in crumbs %}
+{% if c.url %}<a href="{{ c.url }}">{% endif %}{{ c.text }}{% if c.url %}</a>{% endif %}{% if not loop.last %} / {% endif %}
+{% endfor %}
+{% endmacro %}
+
+{% macro action(id, text, alt, link) %}
+<li>{% if link %}<a href="{{ link }}">{% endif %}<button id="{{ id }}" title="{{ alt }}">{{ text }}</button>{% if link %}</a>{% endif %}</li>
+{% endmacro %}
+
+{% block site %}
+<div class="pagehead">
+  <div class="container">
+    <div class="title">
+      <h1>{% block crumbs %}{% endblock %}</h1>
+      <ul class="actions">
+        {% block actions %}{% endblock %}
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="pagecontent container">
+  {% block pagecontent %} 
+  {% endblock %}
+</div>
+{% endblock %}

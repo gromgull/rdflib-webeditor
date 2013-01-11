@@ -1,0 +1,153 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    border: 0 none;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: #333333;
+    font: 13px/1.4 Helvetica,arial,freesans,clean,sans-serif;
+}
+
+a {
+    color: #4183C4;
+    text-decoration: none;
+}
+
+.clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.clearfix {
+    display: block;
+}
+
+.header {
+    background-color: #F3F3F3;
+    background-image: linear-gradient(#F9F9F9, #F3F3F3);
+    background-repeat: repeat-x;
+    border-bottom: 1px solid #E5E5E5;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+
+.header .container {
+    margin: 0 auto;
+    width: 920px;
+}
+
+.header-title {
+    margin-top: 11px;
+    color: #333333;
+    float: left;
+}
+
+.divider-vertical {
+    background-color: #E5E5E5;
+    border-right: 1px solid #FFFFFF;
+    float: left;
+    height: 40px;
+    margin: 0 10px;
+    width: 1px;
+}
+
+.notification-indicator {
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 -10px;
+    text-align: center;
+    width: 36px;
+}
+
+.notification-indicator .all-read {
+    margin-top: 16px;
+    background-color: #CCCCCC;
+    background-image: linear-gradient(#AAAAAA, #CCCCCC);
+    background-repeat: repeat-x;
+    border-radius: 100px 100px 100px 100px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1) inset, 0 1px 0 #FFFFFF;
+    display: inline-block;
+    height: 8px;
+    width: 8px;
+}
+
+ul.top-nav {
+    float: left;
+    margin-top: 7px;
+    position: relative;
+    list-style: none outside none;
+}
+
+ul.top-nav li {
+    float: left;
+}
+
+ul.top-nav a {
+    color: #333333;
+    display: block;
+    font-weight: bold;
+    margin-left: 5px;
+    padding: 5px;
+    text-decoration: none;
+}
+
+ul.top-nav a:hover {
+    color: #4183ca;
+}
+
+#user-links {
+    float: right;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+
+#user-links li {
+    float: left;
+    margin-left: 10px;
+}
+
+#user-links a, #user-links b {
+    color: #333333;
+    display: block;
+    line-height: 16px;
+    padding: 12px 5px 10px;
+}
+
+#user-links a:hover {
+    color: #4183ca;
+}
+
+#user-links #changes span {
+    background: none repeat scroll 0 0 /* #E5E5E5 */ #d0f0d0;
+    border-radius: 10px 10px 10px 10px;
+    color: #666666;
+    font-size: 10px;
+    font-weight: bold;
+    margin: 0 0 0 5px;
+    padding: 1px 5px 2px;
+    position: relative;
+    top: -1px;
+}
+
+#footer {
+    clear: both;
+    margin: 45px 0 0 0;
+}
+
+#footer .footer {
+    background-color: #F8F8F8;
+    border-bottom: 1px solid #E0E0E0;
+    border-top: 1px solid #E0E0E0;
+    box-shadow: 0 -1px 0 #FFFFFF inset;
+    min-height: 160px;
+    overflow: hidden;
+}
+
+#footer .container {
+    padding-top: 25px;
+}

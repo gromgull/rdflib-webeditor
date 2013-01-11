@@ -1,0 +1,74 @@
+{% extends "page.html" %}
+{% import "select2.html" as select2 %}
+
+{% block extra_head %}
+{{ super() }}
+{{ import_css('import.css') }}
+<script>
+$(document).ready(function() { 
+    $("select[name=format]").select2({
+        width: "element",
+        allowClear: true
+    });
+    /*
+    $("input[name='ooid']").select2({
+        tags:[], 
+        dropdownCss: { display: "none" },
+        maximumSelectionSize: 1
+    });
+    */
+});
+</script>
+{% endblock %}
+
+{% block pagecontent %}
+{# TODO: login_form left here because it's the same type of box i want #}
+<div id="login_form">
+  {% if errors %}
+  <div id="error_box">
+    <ul>
+    {% for error in errors %}
+    <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+  <form action="" method=post>
+    {% if importing %}
+    <p>
+      Source URL: {{- select2.text_input("url", url) -}}
+    </p>
+    <p>
+      Source Format:
+      <select name=format style="width:300px">
+        <option value="RDF-XML" selected=selected>RDF-XML</option>
+        <option value="n3">n3</option>
+        <option value="ntriples">ntriples</option>
+        <option value="turtle">turtle</option>
+        <option value="JSON-LD">JSON-LD</option>
+      </select>
+    </p>
+    {% endif %}
+    <p>
+      <span {% if importing %}title="leave blank if this is the same as the source URL">Public ID{% else %}>Base URI{% endif %}</span>:
+      {{- select2.text_input("pubid", pubid) -}}
+    </p>
+    <p>
+      Prefix:
+      {{- select2.text_input("prefix", prefix) -}}
+    </p>
+    <p>
+      <span title="A verbose name for this ontology">Name:</span>
+      {{- select2.text_input("name", name) -}}
+    </p>
+    <p>
+      Description:
+      {{- select2.textarea("description", description) -}}
+    </p>
+    <p>
+      <button type=submit>{% if importing %}Import{% else %}Create{% endif %}</button>
+    </p>
+  </form>
+</div>
+
+{% endblock %}

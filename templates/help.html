@@ -1,0 +1,23 @@
+{% extends "page.html" %}
+
+{% block pagecontent %}
+<pre>
+TODOS
+=====
+
+ * See README
+
+Workflows
+=========
+
+Proposal submission/acceptance:
+
+* User user interfact to modify a resource
+ - presses "Store" button when done, changes are then stored as "uncommitted" changes.
+* User goes to "Review" page (link appears in top bar next to logout button when there are "uncommited" changes
+ - Reviews changes, unchecking any specific changes or resources to not include in the proposal.
+ - Presses the "Submit" button, fills in the form and submits the proposal.
+* Admin goes to Proposals page and clicks on the User's proposal
+* Admin either Accepts or Rejects the proposal.
+ - Accepting adds the triples in the proposal to the specified ontology
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+{% block content %}
+  <h2>Create Ontology</h2>
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+  <form action="{{ url_for('create_ontology') }}" method=post>
+    <label for="id">id/prefix</label> <input type=text name="id" id="id"> (id to represent the ontology)<br/>
+    <label for="url">base URL</label> <input type=text name="url" id="url"> (leave blank to generate one)<br/>
+    <input type=submit value="Create">
+  </form>
+{% endblock %}
+{% block query %}
+{% endblock %}

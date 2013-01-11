@@ -1,0 +1,164 @@
+{% extends "page.html" %}
+
+{% block extra_head %}
+{{ super() }}
+{{ import_css('resource.css') }}
+{{ import_js('resource.js') }}
+
+<script type="text/javascript">
+var default_data = {{ properties_|jsonify }};
+var ontology = {{ ontology_|jsonify }};
+$(document).ready(function() {
+    initialise(ontology, default_data);
+});
+</script>
+{% endblock %}
+
+{% block crumbs %}
+{{ crumbs([
+{'url':'/', 'text': 'Ontologies'}, 
+{'text': ontology_.prefix, 'url': url_for('ontology', ontology_=ontology_.prefix)},
+{'text': name}
+]) }}
+{% endblock %}
+
+{% block templates %}
+{{ load_template('row', 'resource/property.html') }}
+{% endblock %}
+
+{% block pagecontent %}
+<div class="metabox clearfix">
+  <p id="resuri" class="{% if is_new %}editing{% endif %}" data-context="{{ ontology_.context }}" orig="{{ uri }}">
+    URI: <span class="uri">{{ uri }}</span>
+    {% if session.logged_in %}
+    <span class="options">(<a class="change" href="#">change</a><a class="reset" href="#">reset</a>)</span>
+    {% endif %}
+    <input class="" type="text" value="{{ uri }}"/>
+    <button class="set" value="OK">Set</button>
+    <button class="cancel" value="Cancel">Cancel</button>
+    <span class="error">Error: No URI entered</span>
+  </p>
+</div>
+{% if isproposal %}
+<div class="proposaltools metabox clearfix">
+  This is a proposal: 
+  <form action="{{ url_for('ontology', ontology_=ontology_.prefix, resource_=uri) }}" method="post">
+    <button class="reject" name="reject" title="reject this proposal">reject</button>
+    <button class="accept" name="accept" title="accept this proposal">accept</button>
+  </form>
+</div>
+{% endif %}
+
+{{ tabnav([
+{'text': 'Properties', 'selected': true, 'target': '#properties', 'id': 'propertiestab'},
+{'text': 'Source', 'target': '#source', 'id': 'sourcetab'},
+{'text': 'Proposals', 'counter': 0, 'target': '#proposals', 'id': 'proposalstab'},
+{'text': 'History', 'target': '#history', 'id': 'historytab'}
+],[]) }}
+
+<div id="properties" class="content-tab bubble clearfix">
+  <table class="properties" data-subject="{{ uri }}" data-context="{{ ontology_.context }}">
+    <thead>
+      <tr>
+        <th style="width: 355px">predicate</th>
+        <th>object</th>
+      </tr>
+    </thead>
+    <tbody class="options">
+      <tr>
+    {% if session.logged_in %}
+        <td colspan="2">
+          <button id="addpredicate">add new predicate</button>
+          <form action="{{ url_for('create_resource', ontology_= ontology_.prefix) }}" method="POST" id="submit" class="{% if auto_save %}reallyhideme{% endif %}">
+            <input type="hidden" name="diff"/>
+            <input type="hidden" name="uri"/>
+            <button id="submitresource" 
+                    type="submit" 
+                    title="Store">
+              Store
+            </button>
+          </form>
+        </td>
+      </tr>
+    {% endif %}
+    </tbody>
+  </table>
+</div>
+
+<div id="source" class="content-tab reallyhideme bubble clearfix">
+  <!-- TODO: proper NT renderer -->
+  <textarea wrap="off">
+    ### TODO: show DIFF (i.e. new lines green, deleted lines red) ###
+  </textarea>
+  <div class="clearfix">
+    <button id="resetsource">reset</button>
+    <button id="submitchanges" type="submit">submit changes</button>
+  </div>
+</div>
+<div id="proposals" class="content-tab clearfix">
+  {% for changeset in proposals|sort(attribute='date',reverse=True) %}
+  <h3 class="changeset-heading">
+    <b>{{ changeset.addition|count }} addition{% if changeset.addition|count != 1 %}s{% endif %}</b>
+    and <b>{{ changeset.removal|count }} removal{% if changeset.removal|count != 1 %}s{% endif %}</b>
+    proposed by <b>{{ changeset.user.name }}</b> on <b>{{ changeset.date|datetimeformat('%d.%m.%Y') }}</b></h3>
+  <div class="changeset-comment">{{ changeset.comment }}</div>
+  <div class="changeset-details">
+    
+  </div>
+  <table class="changeset-changes">
+    {% for change in changeset.addition %}
+    <tr class="addition">
+      <td>{{ change.pred }}</td><td>{{ change.val }}</td>
+    </tr>
+    {% endfor %}
+    {% for change in changeset.removal %}
+    <tr class="removal">
+      <td>{{ change.pred }}</td><td>{{ change.val }}</td>
+    </tr>
+    {% endfor %}
+    <tr class="tools">
+      <td colspan="2">
+        <form action="{{ url_for('ontology', ontology_=ontology_.prefix, resource_=uri) }}" method="post">
+          <input type="hidden" name="changeset" value="{{ changeset.uri }}"/>
+          <button class="reject" name="reject" data-changeset="{{ changeset.uri }}" title="reject this proposal">reject</button>
+          <button class="accept" name="accept" data-changeset="{{ changeset.uri }}" title="accept this proposal">accept</button>
+        </form>
+      </td>
+    </tr>
+  </table>
+  {% endfor %}
+</div>
+
+<div id="history" class="content-tab reallyhideme clearfix">
+  {% for changeset in history|sort(attribute='date',reverse=True) %}
+  <h3 class="changeset-heading">
+    <b>{{ changeset.addition|count }} addition{% if changeset.addition|count != 1 %}s{% endif %}</b>
+    and <b>{{ changeset.removal|count }} removal{% if changeset.removal|count != 1 %}s{% endif %}</b>
+    by <b>{{ changeset.user.name }}</b> on <b>{{ changeset.date|datetimeformat('%d.%m.%Y') }}</b></h3>
+  <div class="changeset-comment">{{ changeset.comment }}</div>
+  <div class="changeset-details">
+    
+  </div>
+  <table class="changeset-changes">
+    {% for change in changeset.addition %}
+    <tr class="addition">
+      <td>{{ change.pred }}</td><td>{{ change.val }}</td>
+    </tr>
+    {% endfor %}
+    {% for change in changeset.removal %}
+    <tr class="removal">
+      <td>{{ change.pred }}</td><td>{{ change.val }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endfor %}
+</div>
+
+{% if uri %}
+<div id="comments">
+  <h2>Comments</h2>
+  <h2>{{ auto_save }}</h2>
+</div>
+{% endif %}
+
+{% endblock %}

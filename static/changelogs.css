@@ -1,0 +1,47 @@
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    font: inherit;
+}
+
+table#changes {
+    border: 1px solid #CCCCCC;
+    margin-bottom: 23px;
+    position: relative;
+    width: 100%;
+}
+
+table#changes tr.subject {
+    background: linear-gradient(#FAFAFA, #EAEAEA) repeat scroll 0 0 transparent;
+    border-bottom: 1px solid #D8D8D8;
+    color: #555555;
+    font-size: 12px;
+    height: 33px;
+    overflow: hidden;
+    padding: 5px 10px;
+    text-align: left;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+
+table#changes td {
+    padding: 5px 10px;
+}
+
+table#changes tr.addition {
+    background-color: #DDFFDD;
+}
+
+table#changes tr.removal {
+    background-color: #FFDDDD;
+}
+
+tr.value td div + div, tr.subject td a div + div {
+    font-size: 10px;
+    float: left;
+    padding-right: 10px;
+}
+tr.value td div + div + div, tr.subject td a div + div + div {
+    // display: none;
+    float: left;
+
+}

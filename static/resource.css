@@ -1,0 +1,421 @@
+/* properties stuff */
+
+.properties {
+    border: 1px solid #CACACA;
+    border-radius: 3px 3px 3px 3px;
+    margin: 0;
+    width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    font: inherit;
+}
+
+.properties th {
+    background: -moz-linear-gradient(#FAFAFA, #EAEAEA) repeat scroll 0 0 transparent;
+    border-bottom: 1px solid #D8D8D8;
+    color: #555555;
+    font-weight: bold;
+    padding: 6px 3px;
+    text-align: left;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+
+.properties th:first-child {
+    padding-left: 10px;
+}
+
+.properties tr {
+    background: none repeat scroll 0 0 #F8F8F8;
+    color: #484848;
+}
+
+.properties tr.removed {
+    background: none repeat scroll 0 0 #FFDDDD;
+}
+
+.properties tr.added {
+    background: none repeat scroll 0 0 #DDFFDD;
+}
+
+.properties td:first-child {
+    padding-left: 10px;
+}
+
+.properties td {
+    border-bottom: 1px solid #EEEEEE;
+    padding: 7px 3px;
+    vertical-align: middle;
+}
+
+.properties tbody > tr:not(:first-child) > td.property > span {
+    display: none;
+}
+
+.properties td.options {
+    padding-left: 10px;
+    max-width: 74px;
+}
+
+.properties td.options li {
+    position: relative;
+    list-style-type: none;
+    text-align: center;
+    float: left;
+}
+
+button#addpredicate {
+    float: left;
+}
+
+button#submitchanges, button#submitresource  {
+    float: right;
+}
+
+button#resetchanges {
+    float: right;
+    margin-right: 10px;
+}
+
+.properties td.options button, .properties td.options span.edit {
+    width: 20px;
+}
+
+.properties tbody > tr > td.options > ul > li.add {
+    display: none;
+}
+
+.properties tbody > tr:last-child > td.options > ul > li.add {
+    display: block;
+}
+
+td.value {
+    width: 50%;
+}
+
+td.value > div.select2-container, td.property > div.select2-container {
+    width: 100%;
+}
+
+td > textarea {
+    resize:vertical;
+    -moz-box-sizing: border-box;
+    background: none repeat scroll 0 0 #FEFEFE;
+    border: 1px solid #DDDDDD;
+    border-radius: 3px 3px 3px 3px;
+    max-width: 100%;
+    min-width: 100%;
+    min-height: 50px;
+    padding: 2px;
+    width: 100%;
+    height: auto;
+}
+
+.properties tbody > tr:first-child .property {
+    visibility: visible;
+}
+
+.properties .property {
+    vertical-align: top;
+    visibility: hidden;
+}
+
+/* label/qname/uri setup */
+td.editing > div {
+    display: none;
+}
+
+td > div:empty,
+li > div:empty
+{
+    display: none;
+}
+
+td > div.label:not(:empty) + div.qname:not(:empty),
+li > div.label:not(:empty) + div.qname:not(:empty)
+{
+    font-size: 10px;
+    float: left;
+    padding-right: 10px;
+}
+
+td > div.label:empty + div.qname:not(:empty) + div,
+li > div.label:empty + div.qname:not(:empty) + div
+{
+    font-size: 10px;
+    padding-right: 10px;
+}
+
+td > div.label:not(:empty) + div.qname:not(:empty) + div,
+li > div.label:not(:empty) + div.qname:not(:empty) + div
+{
+    font-size: 10px;
+}
+
+li > div.label:not(:empty) + div.qname:not(:empty) + div {
+    float:left;
+}
+
+
+td > div.label:empty + div.qname:empty + div {
+}
+
+td.base > textarea {
+    display: none;
+}
+
+td.editing > textarea {
+    display: inline;
+}
+
+/* value options */
+
+td ul.options {
+    list-style: none outside none;
+}
+
+/* don't display options for properties that aren't .new */
+td.property:not(.new) ul.options {
+    display: none;
+}
+
+td ul.left li {
+    float:left;
+    font-size: 10px;
+    padding-right: 5px;
+}
+
+td ul.right {
+    float:right;
+    font-size: 10px;
+}
+
+td ul.right li {
+    float:left;
+    font-size: 10px;
+    padding-left: 3px;
+}
+
+td ul.options li,
+td.value:not(.editing) ul.search-results 
+{
+    display: none;
+}
+
+/* visible widget options when in "base" mode */
+tr:not(.deleted) td.value.base ul li.change, 
+tr:not(.modified):not(.deleted) td.value.base ul li.delete,
+tr.modified td.value.base ul li.reset,
+tr.deleted td.value.base ul li.reset,
+tr:last-child td.value.base ul li.add,
+tr td.property.base ul li.change
+{
+    display: inline;
+}
+
+/* visible widget options when "editing" */
+td.value.editing ul li.literal, 
+td.value.editing ul li.manual, 
+td.value.editing ul li.done, 
+td.value.editing ul li.cancel,
+td.property.editing ul li.done,
+td.property.editing ul li.cancel
+{
+    display: inline;
+}
+
+/* seperator between widget options */
+tr td ul.options li:after 
+{
+    padding-left: 3px;
+    content: "|";
+}
+
+/* final elements in different widget modes */
+tr:not(.modified):not(.deleted) td.value ul li.change:after, 
+td.value ul li.done:after,
+td.value ul li.add:after,
+tr td.value ul li.literal:after,
+tr td.value ul li.reset:after,
+tr:not(:last-child) td.value ul li.delete:after,
+tr td.property ul li.change:after,
+tr td.property ul li.done:after
+{
+    content: "" !important;
+}
+
+/* mixed red and green background for "modified" elements */
+table.properties tr.modified {
+    background: -moz-linear-gradient(-92deg, #FFDDDD 25%, #DDFFDD 75%) repeat scroll 0 0 transparent;
+}
+
+/* mixed red and green background for "modified" elements */
+table.properties tr.deleted {
+    background: none repeat scroll 0 0 #FFDDDD;
+}
+
+/* search results view */
+ul.search-results {
+    list-style: none outside none;
+    border: 1px solid;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #aaa;
+    color: #444;
+    position: absolute;
+    width: auto;
+    overflow: auto;
+    max-height: 200px;
+    z-index: 100;
+}
+
+ul.search-results li {
+    padding: 4px;
+    border-bottom: 1px solid #aaa;
+    cursor: pointer;
+}
+
+ul.search-results li:hover {
+    background: #3875d7;
+    color: #fff;
+}
+
+ul.search-results li div {
+    white-space: nowrap;
+    display: block;
+}
+
+/* URI editing */
+#resuri > * {
+    display: none;
+}
+
+#resuri:not(.editing) > span.uri,
+#resuri:not(.editing) > span.options
+{
+    display: inline;
+}
+
+#resuri.editing > input,
+#resuri.editing > button
+{
+    display: inline;
+}
+
+#resuri:not(.changed) a.reset {
+    display: none;
+}
+
+#resuri.changed a.change:after {
+    content: " | ";
+}
+
+/*
+td.property div + div {
+    font-size: 10px;
+    float: left;
+    padding-right: 10px;
+}
+td.property div + div + div {
+    // display: none;
+    float: left;
+}
+*/
+.properties td button {
+    font-weight: normal;
+}
+
+#resuri input {
+    // background: none repeat scroll 0 0 transparent !important;
+    -moz-box-sizing: border-box; /* firefox */
+    -ms-box-sizing: border-box;     /* ie */
+    -webkit-box-sizing: border-box; /* webkit */
+    -khtml-box-sizing: border-box;  /* konqueror */
+    box-sizing: border-box;         /* css3 */
+    border: 0 none;
+    box-shadow: none;
+    color: #666666;
+    font-family: sans-serif;
+    font-size: 100%;
+    height: 15px;
+    margin: 1px 0;
+    outline: 0 none;
+    padding: 5px;
+    background-color: #fff;
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eeeeee), color-stop(0.5, white));
+    background-image: -webkit-linear-gradient(center bottom, #eeeeee 0%, white 50%);
+    background-image: -moz-linear-gradient(center bottom, #eeeeee 0%, white 50%);
+    background-image: -o-linear-gradient(bottom, #eeeeee 0%, #ffffff 50%);
+    background-image: -ms-linear-gradient(top, #eeeeee 0%, #ffffff 50%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#eeeeee', endColorstr = '#ffffff', GradientType = 0);
+    background-image: linear-gradient(top, #eeeeee 0%, #ffffff 50%);
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #aaa;
+    /*display: block;*/
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 0 0 8px;
+    color: #444;
+    text-decoration: none; 
+    background: #fff  no-repeat 100% -22px;
+    background:  no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, white), color-stop(0.99, #eeeeee));
+    background: no-repeat 100% -22px, -webkit-linear-gradient(center bottom, white 85%, #eeeeee 99%);
+    background:  no-repeat 100% -22px, -moz-linear-gradient(center bottom, white 85%, #eeeeee 99%);
+    background:  no-repeat 100% -22px, -o-linear-gradient(bottom, white 85%, #eeeeee 99%);
+    background: no-repeat 100% -22px, -ms-linear-gradient(top, #ffffff 85%, #eeeeee 99%);
+    background:  no-repeat 100% -22px, linear-gradient(top, #ffffff 85%, #eeeeee 99%);
+    padding: 4px 20px 4px 5px;
+    outline: 0;
+    border: 1px solid #aaa;
+    font-family: sans-serif;
+    font-size: 1em;
+    width:100%;
+    margin:0;
+    height:auto !important;
+    min-height: 26px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+}
+
+#resuri input {
+    width: 84%;
+}
+
+span.deleteicon {
+    position: relative;
+}
+span.deleteicon span {
+    position: absolute;
+    display: block;
+    top: 0px;
+    right: 5px;
+    width: 13px;
+    height: 13px;
+    background-color: #CCCCCC;
+    background-image: linear-gradient(#AAAAAA, #CCCCCC);
+    border-radius: 100px 100px 100px 100px;
+    cursor: pointer;
+}
+
+span.deleteicon span:before {
+    content: "❌";
+    top: -2px;
+    margin-left: 2px;
+    color: white;
+    position: absolute;
+}
+
+span.deleteicon input {
+    padding-right: 16px;
+}

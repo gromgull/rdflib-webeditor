@@ -1,0 +1,101 @@
+.site .container {
+    margin: 0 auto;
+    width: 920px;
+}
+
+.pagehead {
+    display: block;
+    margin: 0 0 20px;
+    padding-top: 20px;
+    position: relative;
+}
+
+.pagehead .container {
+    position: relative;
+}
+
+.title ul.actions {
+    padding: 0 0 0 20px;
+    position: relative;
+    right: 0;
+    top: 0;
+    float: right;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    z-index: 21;
+}
+
+.title ul.actions > li {
+    color: #333333;
+    display: inline;
+    float: left;
+    font-size: 11px;
+    list-style-type: none;
+    margin: 0 5px 0 0;
+}
+
+.metabox {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #FAFAFA;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-color: #DDDDDD #DDDDDD #DDDDDD;
+    border-image: none;
+    border-right: 1px solid #DDDDDD;
+    border-style: solid;
+    border-width: 1px;
+    color: #333333;
+    font-size: 12px;
+    margin-bottom: 10px;
+    padding: 10px;
+    position: relative;
+}
+
+.dialog button {
+    float:right;
+    margin-left: 10px;
+}
+
+.dialog {
+    top: 25%;
+    left: 25%;
+    position: absolute;
+    margin: 0 auto;
+    float: left;
+    width: 50%;
+    background-color: #FFFFFF;
+}
+
+.dialog textarea {
+    -moz-box-sizing: border-box;
+    background: none repeat scroll 0 0 #FAFAFA;
+    border: 1px solid #DDDDDD;
+    border-radius: 3px 3px 3px 3px;
+    display: block;
+    min-height: 100px;
+    max-width: 100%;
+    min-width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.error {
+    color: red !important;
+    display: none;
+}
+
+.hideme {
+    visibility: hidden !important;
+}
+
+.reallyhideme {
+    visibility: hidden !important;
+    display: none !important;
+}

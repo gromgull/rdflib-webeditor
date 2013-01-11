@@ -1,0 +1,83 @@
+{% extends "page.html" %}
+
+{% block extra_head %}
+{{ super() }}
+{{ import_css('index.css') }}
+{% endblock %}
+
+{% block crumbs %}{{ crumbs([{'url':'/', 'text': 'Ontologies'}]) }}{% endblock %}
+{% block actions %}
+{{ action("import-ontology", "Import Ontology", "Import Ontology", "_import") }}
+{{ action("create-ontology", "Create New Ontology", "Create New Ontology", "_new") }}
+{% endblock %}
+
+{% block pagecontent %}
+<ul class="ontologies">
+  {% for o in ontologies %}
+  <li>
+    <div class="clearfix">
+      <h3 class="ontology-name">
+        <a href="{{ url_for('ontology', ontology_=o.prefix) }}">{{ o.name }}</a>
+      </h3>
+      <div class="ontology-url">{{ o.context }}</div>
+    </div>
+    <div class="ontology-description">
+      {{ o.description }}
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
+
+{#
+{% block body %}
+{% block intro %}
+    <h3>Menu:</h3>
+    <ul>
+      {% if not session.logged_in %}
+      <li><a href="{{ url_for('login') }}">log in</a></li>
+      {% else %}
+      <li><b>Logged in as {{ session.user.name }}</b></li>
+      <li><a href="{{ url_for('logout') }}">log out</a></li>
+      {% endif %}
+      <li><a href="{{ url_for('index') }}#ontologies">browse ontologies</a></li>
+      <li><a href="#query">query</a></li>
+      {% if session.logged_in %}<li><a href="{{ url_for('create_ontology') }}">create new ontology</a></li>{% endif %}
+      {% block extra_menu %}
+      {% endblock %}
+    </ul>
+{% endblock %}
+    <hr/>
+{% block content %}
+    <h2><a name="ontologies">Ontologies:</a></h2>
+    <ul>
+      {% for o in ontologies %}
+      <li><a href="{{ url_for('ontology', ontology_=o) }}">{{ o }}</a></li>
+      {% endfor %}
+    </ul>
+{% endblock %}
+{% block query %}
+    <hr/>
+    <h2><a name='query'>Query:</a></h2>
+    <form action="{{url_for("query")}}" name="query" method="GET">
+      <textarea rows="10" cols="80" name="query">
+PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX dc: &lt;http://purl.org/dc/elements/1.1/&gt;
+
+SELECT * WHERE { ?x dc:title ?label . }
+      </textarea><br/>
+      <label>Result format:</label> <select name="output">
+        <option>xml</option>
+        <option>json</option>
+        <option>html</option>
+      </select>
+      <br/>
+      <label>Force text/plain:</label><input type="checkbox" name="force-accept" /><br/>
+      <input type="submit" value="query">
+    </form>
+{% endblock %}
+{% endblock %}
+
+#}
