@@ -3,10 +3,9 @@ from flask import g
 import sqlite3
 import datetime
 import re
-import traceback
 import time
 import itertools
-from config import *
+from config import DATABASE, BASE_URL
 
 # DATABASE UTILS
 

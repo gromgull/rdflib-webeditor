@@ -16,7 +16,6 @@ from config import *
 import atexit
 
 # NAMESPACES
-#PROPOSALS = Namespace("http://data.igreen-services.com/proposals/")
 FOAF = Namespace("http://xmlns.com/foaf/0.1/")
 CS = Namespace("http://purl.org/vocab/changeset/schema#")
 
