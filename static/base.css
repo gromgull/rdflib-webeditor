@@ -151,3 +151,8 @@ ul.top-nav a:hover {
 #footer .container {
     padding-top: 25px;
 }
+
+#versions { 
+    font-size: 0.7em;
+    margin-left: 10px;
+}

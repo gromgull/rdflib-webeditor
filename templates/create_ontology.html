@@ -1,4 +1,10 @@
 {% extends "index.html" %}
+
+{% block extra_head %}
+{{ super() }}
+{{ import_css('import.css') }}
+{% endblock %}
+
 {% block content %}
   <h2>Create Ontology</h2>
   {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}

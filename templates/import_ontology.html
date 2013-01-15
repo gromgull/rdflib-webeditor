@@ -33,7 +33,7 @@ $(document).ready(function() {
     </ul>
   </div>
   {% endif %}
-  <form action="" method=post>
+  <form action="" method="post">
     {% if importing %}
     <p>
       Source URL: {{- select2.text_input("url", url) -}}
@@ -50,19 +50,19 @@ $(document).ready(function() {
     </p>
     {% endif %}
     <p>
-      <span {% if importing %}title="leave blank if this is the same as the source URL">Public ID{% else %}>Base URI{% endif %}</span>:
+      <label {% if importing %}title="leave blank if this is the same as the source URL">Public ID{% else %}>Base URI{% endif %}:</label>
       {{- select2.text_input("pubid", pubid) -}}
     </p>
     <p>
-      Prefix:
+      <label>Prefix:</label>
       {{- select2.text_input("prefix", prefix) -}}
     </p>
     <p>
-      <span title="A verbose name for this ontology">Name:</span>
+      <label title="A verbose name for this ontology">Name:</label>
       {{- select2.text_input("name", name) -}}
     </p>
     <p>
-      Description:
+      <label>Description:</label>
       {{- select2.textarea("description", description) -}}
     </p>
     <p>
