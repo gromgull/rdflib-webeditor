@@ -1,18 +1,17 @@
 import rdflib
 import json
+import time
 from jinja2.utils import Markup
 from rdflib.namespace import SKOS, RDF, Namespace, RDFS, XSD
-from rdfextras.utils.pathutils import guess_format
-import rdfextras, sys, os, re, traceback, urllib2
+import rdfextras, sys, os, re, urllib2
 from flask import g
 import datetime
 from functools import wraps
-from itertools import groupby
-from flask import Flask, g, request, redirect, url_for, session
+from flask import Flask, request, redirect, url_for, session
 import flask
 from flaskext.openid import OpenID
-from utils import *
-from config import *
+from utils import connect_db, list_ontologies, get_uncommited_quads, query_db, get_label, parse_string_rdfobject, get_qname, rdfobject2dict, get_proposals, get_changes, get_prefix_from_uri, rdfstring2dict, accept_changeset, reject_changeset, get_proposal, revert_changes, propose_changeset, store_triples, commit_db, qname2uri, store_subject_diff, get_user, create_user
+from config import data, ONTOLOGY_DIR
 import atexit
 
 # NAMESPACES

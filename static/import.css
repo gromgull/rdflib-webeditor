@@ -1,0 +1,9 @@
+label { 
+    display: inline-block; 
+    width: 100px; 
+    vertical-align: top;
+}
+
+form input.object { width: 200px; }
+
+form textarea { margin-left: 0; width: 200px; }
