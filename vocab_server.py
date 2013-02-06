@@ -3,7 +3,7 @@ import json
 import time
 from jinja2.utils import Markup
 from rdflib.namespace import SKOS, RDF, Namespace, RDFS, XSD
-import rdfextras, sys, os, re, urllib2
+import sys, os, re, urllib2
 from flask import g
 import datetime
 from functools import wraps
@@ -61,7 +61,6 @@ application.config.update(
     PASSWORD = 'default'
 )
 application.jinja_env.globals["rdflib_version"]=rdflib.__version__
-application.jinja_env.globals["rdfextras_version"]=rdfextras.__version__
 application.jinja_env.globals["python_version"]="%d.%d.%d"%(sys.version_info[0], sys.version_info[1], sys.version_info[2])
 
 # jinja filter for date formatting

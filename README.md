@@ -8,7 +8,6 @@ REQUIREMENTS
 ------------
 * python 2.7.x
 * rdflib 3.2.3
-* rdfextras 0.3
 * flask 0.9
 * Flask-OpenID 1.0.1
 
