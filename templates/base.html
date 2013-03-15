@@ -27,6 +27,7 @@
           
       };
     </script>
+	<script>window.FLASK_ROOT_URL = {{ url_for('ajaxroot')|tojson|safe }};</script>
   </head>
   <body>
     <div class="reallyhideme" id="templates">

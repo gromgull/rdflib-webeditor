@@ -401,7 +401,7 @@ var initialise = function(ontology, predicateData) {
                         if (last_term == null || term !== last_term) {
                             $.ajax({
                                 type: 'GET',
-                                url: "/ajax/search",
+                                url: window.FLASK_ROOT_URL+"/search",
                                 data: {
                                     "term": term,
                                     "type": $(p).is(".property") ? "predicates" : "all",

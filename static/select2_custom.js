@@ -61,7 +61,7 @@ function gen_query_for_custom_entry() {
             //data: objectData,
             minimumInputLength: 1,
             ajax: {
-                url: "/ajax/search",
+                url: window.FLASK_ROOT_URL+"/search",
                 dataType: "json",
                 quietMillis: 1000,
                 data: function(term, page) {

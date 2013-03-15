@@ -458,6 +458,10 @@ quad_re = """^<([^>]+)>\s+<([^>]+)>\s+("[^"]*"(?:\^\^[^\s]+|@[^\s]+|)|<[^>]+>|[+
 
 ### AJAX Calls ###
 
+@application.route("/ajax")
+def ajaxroot(): # only here to make url_for find it
+    pass
+
 # saves a "diff" from the resource.html template to the "uncommited changes" database
 @application.route("/ajax/save", methods=['POST'])
 def autosave():

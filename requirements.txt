@@ -1,0 +1,10 @@
+Flask==0.9
+Flask-OpenID==1.0.1
+Jinja2==2.6
+Werkzeug==0.8.3
+argparse==1.2.1
+html5lib==0.95
+isodate==0.4.9
+python-openid==2.2.5
+rdflib==3.4.0
+wsgiref==0.1.2
