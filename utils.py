@@ -23,44 +23,9 @@ def commit_db():
 
 # USER UTILS
 
-# depreciated (users are now stored in the sql database)
-def get_user_in_rdf(openid):
-    usersgraph = g.graph.get_context(BASE_URL + "users")
-    t = [t for t in usersgraph.triples((None, FOAF.openid, openid))]
-    if len(t) > 0:
-        person = t[0][0]
-        user = {'uri': person}
-        for t in usersgraph.triples((person, None, None)):
-            if t[1] == FOAF.mbox:
-                user['email'] = t[2]
-            elif t[1] == FOAF.name:
-                user['name'] = t[2]
-            elif t[1] == FOAF.openid:
-                user['openid'] = t[2]
-        return user
-    else:
-        return None
-
 def get_user(openid):
     return query_db('select * from users where openid = ?', [openid], one=True)
 
-# depreciated (users are now stored in the sql database)
-def create_user_in_rdf(openid, name, email):
-    usersgraph = g.graph.get_context(BASE_URL + "users")
-    # Generate a unique user URI
-    person_base = '#' + name.replace(' ', '')
-    if (rdflib.URIRef(person_base), RDF.type, FOAF.Person) in usersgraph:
-        num = 1
-        while (rdflib.URIRef(person_base + str(num)), RDF.type, FOAF.Person) in usersgraph:
-            num += 1
-        person_base += str(num)
-    # Create the FOAF triples
-    person_base = rdflib.URIRef(person_base)
-    usersgraph.add((person_base, RDF.type, FOAF.Person))
-    usersgraph.add((person_base, FOAF.mbox, email))
-    usersgraph.add((person_base, FOAF.name, name))
-    usersgraph.add((person_base, FOAF.openid, openid))
-    return {'name': name, 'email': email, 'openid': openid, 'uri': person_base}
 
 def create_user(openid, name, email):
     g.db.execute('insert into users (name, email, openid) values (?, ?, ?)',
