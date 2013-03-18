@@ -451,6 +451,13 @@ var initialise = function(ontology, predicateData) {
     $("#resuri a.change").click(function() {
         $("#resuri").addClass("editing");
     });
+	$("#resuri span.uri").dblclick(function() { 
+		$("#resuri").addClass("editing");
+	});
+	$("#resuri input[type='text']").blur(function() { 
+		$("#resuri button.set").click();
+	});
+
 
     // URI editing
     $("#resuri > button.set").click(function() {
@@ -557,4 +564,5 @@ var initialise = function(ontology, predicateData) {
             $("button#submitresource").prop("disabled", true);
         }
     });
+
 }
