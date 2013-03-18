@@ -11,3 +11,9 @@ button[type='submit'] {
     margin-left: 10px;
     float: right;
 }
+
+#selectall { 
+	text-decoration: underline; 
+	cursor: pointer; 
+}
+#selectall { cursor: pointer; }

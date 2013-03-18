@@ -14,9 +14,13 @@
 {% if changes %}
 {{ changelogs.display_changes(changes, true) }}
 
+
+
 <div class="tools clearfix">
   <button id="opensubmit" type="button">Submit</button>
   <button id="openrevert" type="button">Revert</button>
+  <span id="selectall" type="button">select/clear all</span>
+
 </div>
 
 <div id="submission_dialog" class="reallyhideme dialog metabox clearfix">
