@@ -4,6 +4,7 @@ label {
     vertical-align: top;
 }
 
-form input.object { width: 200px; }
-
-form textarea { margin-left: 0; width: 200px; }
+form input.object, form textarea, form .select2-container { 
+    margin-left: 0; 
+    width: 200px; 
+}

@@ -36,12 +36,12 @@ $(document).ready(function() {
   <form action="" method="post">
     {% if importing %}
     <p>
-      Source URL: {{- select2.text_input("url", url) -}}
+      <label>Source URL:</label> {{- select2.text_input("url", url) -}}
     </p>
     <p>
-      Source Format:
-      <select name=format style="width:300px">
-        <option value="RDF-XML" selected=selected>RDF-XML</option>
+      <label>Source Format:</label>
+      <select name="format" style="width:300px">
+        <option value="RDF-XML" selected="selected">RDF-XML</option>
         <option value="n3">n3</option>
         <option value="ntriples">ntriples</option>
         <option value="turtle">turtle</option>
