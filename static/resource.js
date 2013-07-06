@@ -27,8 +27,8 @@ var initialise = function(ontology, predicateData) {
         return src;
     };
 
-    // generates nquads source code from the properties table
-    generate_nquads_source = function() {
+    // generates ntriples source code from the properties table
+    generate_ntriples_source = function() {
         var src = "";
         var subj = $("table.properties").attr("data-subject");
         var ctx = $("table.properties").attr("data-context");
@@ -38,7 +38,7 @@ var initialise = function(ontology, predicateData) {
             if (pred && !$(this).is(".removed")) {
                 var val = $(this).find("td.value div.uri a").html() || 
                     $(this).find("td.value div.uri").html();
-                src += gen_quad(subj, pred, val, ctx) + "\n";
+                src += gen_quad(subj, pred, val) + "\n";
             }
         });
         // remove trailing \n
@@ -565,4 +565,7 @@ var initialise = function(ontology, predicateData) {
         }
     });
 
+    $("#sourcetab a").click(function () { 
+	$("#source textarea").text(generate_ntriples_source());
+    } );
 }

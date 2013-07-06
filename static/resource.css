@@ -419,3 +419,7 @@ span.deleteicon span:before {
 span.deleteicon input {
     padding-right: 16px;
 }
+
+#source textarea { 
+    width: 100%;
+}
